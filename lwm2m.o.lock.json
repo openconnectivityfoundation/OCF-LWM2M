@@ -1,0 +1,45 @@
+{
+  "id": "http://openinterconnect.org/asamapping/schemas/asa.environment.currentairquality.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Lock",
+  "definitions": {
+    "lwm2m.o.lock": {
+      "type": "object",      
+      "properties": {
+        "Lock Status(50)": {
+          "type": "boolean",
+          "description": "The status of the lock, 1:Locked, 0:Unlocked.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.lock.status",
+            "x-to-ocf": [
+              "If(Lock Status(50) == 1) {oic.r.lock.status.lockState = “Locked”;} else {oic.r.lock.status.lockState = “Unlocked”;}"
+            ],                          
+            "x-from-ocf": [
+              "If(oic.r.lock.status.lockState == “Locked”) {Lock Status(50) = 1;} else {Lock Status(50) = 0;}"
+            ]
+          }
+        },
+        "Lock Name(1)": {
+          "type": "string",
+          "description": "Name",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.lock.status",
+            "x-to-ocf": [
+              "oic.r.lock.status.n = Lock Name(1);"
+            ],                          
+            "x-from-ocf": [
+              "Lock Name(1) = oic.r.lock.status.n"
+            ]
+          }
+        }   
+      }
+    }
+  },   
+    
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/lwm2m.o.lock"}    
+  ],
+  "required": ["Lock Name(1)"]
+}

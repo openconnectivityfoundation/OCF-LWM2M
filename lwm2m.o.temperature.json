@@ -1,0 +1,70 @@
+{
+  "id": "http://openinterconnect.org/asamapping/schemas/asa.environment.currentairquality.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Temperature",
+  "definitions": {
+    "lwm2m.o.temperature": {
+      "type": "object",      
+      "properties": {
+        "Sensor Value (5700)": {
+          "type": "float",
+          "description": "Last or Current Measured Value from the Sensor.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.temperature",
+            "x-to-ocf": [
+              "oic.r.temperature.temperature = Sensor Value(5700)"
+            ],                          
+            "x-from-ocf": [
+              "Sensor Value(5700) = oic.r.temperature.temperature"
+            ]
+          }
+        },
+        "Sensor units (5701)": {
+          "type": "string",
+          "description": "Measurement Units Definition.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.temperature",
+            "x-to-ocf": [
+              "oic.r.temperature.units = Sensor units (5701)"
+            ],
+            "x-from-ocf": [
+              "Sensor units (5701) = oic.r.temperature.units"
+            ]
+          }
+        },
+        "Min Range Value (5603)": {
+          "type": "float",
+          "description": "The minimum value that can be measured by the sensor.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.temperature",
+            "x-to-ocf": [
+              "oic.r.temperature.range[0] = Min Range Value (5603)"
+            ],
+            "x-from-ocf": [
+              "Min Range Value (5603) = oic.r.temperature.range[0]"
+            ]
+          }
+        },"Max Range Value (5604)": {
+          "type": "float",
+          "description": "The maximum value that can be measured by the sensor.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.temperature",
+            "x-to-ocf": [
+              "oic.r.temperature.range[1] = Max Range Value (5604)"
+            ],
+            "x-from-ocf": [
+              "Max Range Value (5604) = oic.r.temperature.range[1]"
+            ]
+          }
+        }
+      }
+    }
+  },   
+    
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/lwm2m.o.temperature"}    
+  ],
+  "required": ["Sensor Value (5700)"]
+}

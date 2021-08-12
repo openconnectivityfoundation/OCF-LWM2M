@@ -1,0 +1,44 @@
+{
+  "id": "http://openinterconnect.org/asamapping/schemas/asa.environment.currentairquality.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Door",
+  "definitions": {
+    "lwm2m.o.door": {
+      "type": "object",      
+      "properties": {
+        "Door status(50)": {
+          "type": "boolean",
+          "description": "The status of the door, 1:Opened, 0:Closed.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.door",
+            "x-to-ocf": [
+              "If (Door status(50) == 1) {oic.r.door.openState = “open”;} else {oic.r.door.openState = “closed”;}"
+            ],                          
+            "x-from-ocf": [
+              "if(oic.r.door.openState == “open”) {Door status(50) = 1; } else { Door statue(50) = 0;}"
+            ]
+          }
+        },
+        "Door Name(1)": {
+          "type": "float",
+          "description": "The name of the door.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.door",
+            "x-to-ocf": [
+              "oic.r.door.n = Door Name(1)"
+            ],                          
+            "x-from-ocf": [
+              "Door Name(1) = oic.r.door.n"
+            ]
+          }
+        }   
+      }
+    }
+  },       
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/lwm2m.o.door"}    
+  ],
+  "required": ["Door status(50)", "Door Name(1)"]
+}

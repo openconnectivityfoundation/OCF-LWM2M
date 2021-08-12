@@ -1,0 +1,43 @@
+{
+  "id": "http://openinterconnect.org/asamapping/schemas/asa.environment.currentairquality.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Energy",
+  "definitions": {
+    "lwm2m.o.energy": {
+      "type": "object",      
+      "properties": {
+        "Sensor Value (5700)": {
+          "type": "float",
+          "description": "Last or Current Measured Value from the Sensor. (energy consumption (Cumulative Power) of an electrical load)",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.energy.consumption",
+            "x-to-ocf": [
+              "oic.r.energy.consumption.energy = Sensor Value(5700)"
+            ],                          
+            "x-from-ocf": [
+              "Sensor Value(5700) = oic.r.energy.consumption.energy"
+            ]
+          }
+        },
+        "Application Type (5750)": {
+          "type": "float",
+          "description": "The application type of the sensor or actuator as a string depending on the use case.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.energy.consumption",
+            "x-to-ocf": [""],                          
+            "x-from-ocf": [
+              "Application Type (5750) = “Energy consumption”"
+            ]
+          }
+        }   
+      }
+    }
+   },   
+    
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/lwm2m.o.energy"}    
+  ],
+  "required": ["Sensor Value (5700)"]
+}
