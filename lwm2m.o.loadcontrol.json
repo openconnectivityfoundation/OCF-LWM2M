@@ -1,0 +1,58 @@
+{
+  "id": "http://openinterconnect.org/asamapping/schemas/asa.environment.currentairquality.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Load Control",
+  "definitions": {
+    "lwm2m.o.loadcontrol": {
+      "type": "object",      
+      "properties": {
+        "Start Time(5824)": {
+          "type": "time",
+          "description": "Start time",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.time.period",
+            "x-to-ocf": [
+              "oic.r.time.period.startTime = Start Time(5824)"
+            ],                          
+            "x-from-ocf": [
+              "Start Time(5824) = oic.r.time.period.startTime"
+            ]
+          }
+        },
+        "Duration in Min(5825)": {
+          "type": "integer",
+          "description": "Duration",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.time.period",
+            "x-to-ocf": [
+              "oic.r.time.period.interval = Duration in Min(5825)"
+            ],
+            "x-from-ocf": [
+              "Duration in Min(5825) = oic.r.time.period.interval"
+            ]
+          }
+        },
+        "Event Identifier(5823)": {
+          "type": "string",
+          "description": "Identifier",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.time.period",
+            "x-to-ocf": [
+              "oic.r.time.period.id = Event Identifier(5823)"
+            ],
+            "x-from-ocf": [
+              "Event Identifier(5823) = oic.r.time.period.id"
+            ]
+          }
+        }		
+      }
+    }
+  },   
+    
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/lwm2m.o.loadcontrol"}    
+  ],
+  "required": ["Start Time(5824)","Duration in Min(5825)", "Event Identifier(5823)"]
+}

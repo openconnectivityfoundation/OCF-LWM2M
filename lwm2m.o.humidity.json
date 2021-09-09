@@ -1,0 +1,32 @@
+{
+  "id": "http://openinterconnect.org/asamapping/schemas/asa.environment.currentairquality.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Humidity",
+  "definitions": {
+    "lwm2m.o.humidity": {
+      "type": "object",      
+      "properties": {
+        "Sensor Value (5700)": {
+          "type": "float",
+          "description": "Last or Current Measured Value from the Sensor.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.humidity",
+            "x-to-ocf": [
+              "oic.r.humidity.humidity = Sensor Value(5700)"
+            ],                          
+            "x-from-ocf": [
+              "Sensor Value(5700) = oic.r.humidity.humidity"
+            ]
+          }
+        }    			
+      }
+    }
+  },   
+    
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/lwm2m.o.humidity"}    
+  ],
+  "required": ["Sensor Value (5700)"]
+}

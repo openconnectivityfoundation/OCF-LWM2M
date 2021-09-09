@@ -1,0 +1,57 @@
+{
+  "id": "http://openinterconnect.org/asamapping/schemas/asa.environment.currentairquality.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Position",
+  "definitions": {
+    "lwm2m.o.position": {
+      "type": "object",      
+      "properties": {
+        "Current Position (5536)": {
+          "type": "float",
+          "description": "Current position or desired position of a positioner actuator.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.openlevel",
+            "x-to-ocf": ["oic.r.openlevel.openLevel = Current Position(5536)"
+            ],                          
+            "x-from-ocf": [
+              "Current Position(5536) =  oic.r.openlevel.openLevel"
+            ]
+          }
+        },
+        "Min Limit (5520)": {
+          "type": "float",
+          "description": "The minimum value that can be measured by the sensor.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.openlevel",
+            "x-to-ocf": [
+              "oic.r.openlevel.ragne[0] = Min Limit (5520)"
+            ],
+            "x-from-ocf": [
+              "Min Limit (5520) = oic.r.openlevel.ragne[0]"
+            ]
+          }
+        },
+        "Max Limit (5750)": {
+          "type": "float",
+          "description": "The maximum value that can be measured by the sensor.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.openlevel",
+            "x-to-ocf": [
+              "oic.r.openlevel.ragne[1]= Max Limit (5750)"
+            ],
+            "x-from-ocf": [
+              "Max Limit (5750) = oic.r.openlevel.ragne[1]"
+            ]
+          }
+        }		
+      }
+    }
+  },   
+    
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/lwm2m.o.position"}    
+  ],
+  "required": ["Current Position(5536)"]
+}

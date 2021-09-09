@@ -1,0 +1,57 @@
+{
+  "id": "http://openinterconnect.org/asamapping/schemas/asa.environment.currentairquality.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Digital Input",
+  "definitions": {
+    "lwm2m.o.digitalinput": {
+      "type": "object",      
+      "properties": {
+        "Digital Input state (5500)": {
+          "type": "boolean",
+          "description": "The current state of a digital input.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.vehicle.connector",
+            "x-to-ocf": [
+              "oic.r.vehicle.connector.connected = Digital Input state (5500)"
+            ],                          
+            "x-from-ocf": [
+              "Digital Input state (5500) = oic.r.vehicle.connector.connected"
+            ]
+          }
+        },
+        "Sensor Type (5751)": {
+          "type": "string",
+          "description": "The type of the sensor",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.vehicle.connector",
+            "x-to-ocf": [
+              ""
+            ],
+            "x-from-ocf": [
+              "Sensor Type (5751) = \"Vehicle Connector\""
+            ]
+          }
+        },
+        "Application Type (5750)": {
+          "type": "string",
+          "description": "The minimum value that can be measured by the sensor.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.vehicle.connector",
+            "x-to-ocf": [
+              ""
+            ],
+            "x-from-ocf": [
+              "Application Type (5750) = \"Vehicle Connector\""
+            ]
+          }
+        }		
+      }
+    }   
+  },  
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/lwm2m.o.digitalinput"}    
+  ],
+  "required": ["Digital Input state (5500)"]
+}

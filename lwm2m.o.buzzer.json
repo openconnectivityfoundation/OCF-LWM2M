@@ -1,0 +1,43 @@
+{
+  "id": "http://openinterconnect.org/asamapping/schemas/asa.environment.currentairquality.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Buzzer",
+  "definitions": {
+    "lwm2m.o.buzzer": {
+      "type": "object",      
+      "properties": {
+        "On/Off(5850)": {
+          "type": "boolean",
+          "description": "On/off control. Boolean value where True is On and False is Off.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.door",
+            "x-to-ocf": [
+            			"oic.r.door.openAlarm = On/Off(5850)"
+            ],                          
+            "x-from-ocf": [
+              "On/Off(5850) = oic.r.door.openAlarm"
+            ]
+          }
+        },    			
+		    "Application Type(5750)": {
+          "type": "string",
+          "description": "The application type of the sensor or actuator as a string depending on the use case.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.door",
+            "x-to-ocf": [""],                          
+            "x-from-ocf": [
+              "Application Type(5750) = \"Door Open Alarm\""
+            ]
+          }
+        }   
+      }
+    }
+        
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/lwm2m.o.buzzer"}    
+  ],
+  "required": ["On/Off(5850)"]
+}

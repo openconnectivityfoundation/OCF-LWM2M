@@ -1,0 +1,132 @@
+{
+  "id": "http://openinterconnect.org/asamapping/schemas/asa.environment.currentairquality.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Device",
+  "definitions": {
+    "lwm2m.o.device": {
+      "type": "object",      
+      "properties": {
+        "Battery Level (9)": {
+          "type": "integer",
+          "description": "Contains the current battery level as a percentage (with a range from 0 to 100). This value is only valid for the Device internal Battery if present (one Available Power Sources Resource Instance is 1).",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.energy.battery",
+            "x-to-ocf": [
+            	"oic.r.energy.battery.charge = Battery Level(9)"
+            ],                          
+            "x-from-ocf": [
+               "Battery Level(9)  = oic.r.energy.battery.charge"
+            ]
+          }
+        },
+        "Device Type (17)": {
+          "type": "string",
+          "description": "Type of the device (manufacturer specified string: e.g. smart meters / dev Class…)",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.wk.d",
+            "x-to-ocf": [
+              "oic.wk.d.n = Device Type (17)"
+            ],
+            "x-from-ocf": [
+              "Device Type (17) = oic.wk.d.n"
+            ]
+          }
+        },
+        "Battery Status (20)": {
+          "type": "integer",
+          "description": "This value is only valid for the Device Internal Battery if present",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.energy.battery",
+            "x-to-ocf": [
+              "switch (Battery Status (20)) {",  
+              "Case 0 :   oic.r.energy.battery.charging = FALSE; oic.r.energy.battery.defect = FALSE; oic.r.energy.battery.lowbattery = FALSE; break;",
+              "Case 1 :   oic.r.energy.battery.charging = TRUE; oic.r.energy.battery.defect = FALSE; oic.r.energy.battery.lowbattery = FALSE; break;",
+              "Case 2 :  oic.r.energy.battery.charging = FALSE; oic.r.energy.battery.defect = FALSE; oic.r.energy.battery.lowbattery = FALSE; break;",
+              "Case 3 :  oic.r.energy.battery.charging = FALSE; oic.r.energy.battery.defect = TRUE; oic.r.energy.battery.lowbattery = FALSE; break;",
+              "Case 4 :  oic.r.energy.battery.charging = FALSE; oic.r.energy.battery.defect = FALSE; oic.r.energy.battery.lowbattery = TRUE;  break;"
+            ],
+            "x-from-ocf": [
+              "If (oic.r.energy.battery.charing == TRUE) {Battery Status (20) = 1;} ",
+              "alse { if (oic.r.energy.battery.defect == TRUE) {Battery Status (20) = 3;} ",
+              "if (oic.r.energy.battery.lowbattery == TRUE) {Battery Status (20) = 4;} ",
+              "if(oic.r.energy.battery.charge == 100) {Battery Status (20)",
+              "= 2;} ",
+              "else {Battery Status (20) = 0;} }"
+            ]
+          }
+        },
+        "Manufacturer (0)": {
+          "type": "string",
+          "description": "Human readable manufacturer name",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.wk.p",
+            "x-to-ocf": [
+              "oic.wk.p.mnmn = Manufacturer (0)"
+            ],
+            "x-from-ocf": [
+              "Manufacturer (0) = oic.wk.p.mnmn"
+            ]
+          }
+        },
+        "Model Number (1)": {
+          "type": "string",
+          "description": "A model identifier (manufacturer specified string)",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.wk.p",
+            "x-to-ocf": [
+              "oic.wk.p.mnmo = Model Number (1)"
+            ],
+            "x-from-ocf": [
+              "Model Number (1) = oic.wk.p.mnmo"
+            ]
+          }
+        },
+        "Serial Number (2)": {
+          "type": "string",
+          "description": "Serial Number",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.wk.p",
+            "x-to-ocf": [
+              "oic.wk.p.mnsel = Serial Number (2)"
+            ],
+            "x-from-ocf": [
+              "Serial Number (2) = oic.wk.p.mnsel"
+            ]
+          }
+        },
+        "Firmware Version (3)": {
+          "type": "string",
+          "description": "Current firmware version of the Device.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.wk.p",
+            "x-to-ocf": [
+              "oic.wk.p.mnfv = Firmware Version (3)"
+            ],
+            "x-from-ocf": [
+              "Firmware Version (3) = oic.wk.p.mnfv"
+            ]
+          }
+        },
+        "Hardware Version (18)": {
+          "type": "string",
+          "description": "Current hardware version of the device.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.wk.p",
+            "x-to-ocf": [
+              "oic.wk.p.mnhw = Hardware Version (18)"
+            ],
+            "x-from-ocf": [
+              "Hardware Version (18) = oic.wk.p.mnhw"
+            ]
+          }
+        }
+      }
+    }
+  },      
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/lwm2m.o.device"}    
+  ],
+  "required": []
+}
